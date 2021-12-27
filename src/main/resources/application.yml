@@ -1,0 +1,66 @@
+# ===============================
+# SERVER CONFIG
+# ===============================
+server:
+  port: 8088
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: base-project
+  main:
+    lazy-initialization: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+  # ===============================
+  # DATABASE
+  # ===============================
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=DB_SpringBoot_Demo
+    username: sa
+    password: 123456aA@
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  # ===============================
+  # JPA / HIBERNATE
+  # ===============================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2008Dialect
+        format_sql: true
+
+# ===============================
+# LOGGING
+# ===============================
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+        ws:
+          client:
+            MessageTracing:
+              sent: TRACE
+              received: TRACE
+          server:
+            MessageTracing:
+              sent: TRACE
+              received: TRACE
+    root: INFO
+    org.hibernate.SQL: INFO
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%X{X-B3-TraceId},%X{X-B3-SpanId},%X{X-B3-ParentSpanId},%X{X-Span-Export}] [${spring.application.name}] %-5level [%thread] %logger{50}.%M - %msg%n"
+  file:
+    name: logs/default.log
