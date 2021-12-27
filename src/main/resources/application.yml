@@ -3,22 +3,27 @@
 # ===============================
 server:
   port: 8088
-  error:
-    whitelabel:
-      enabled: false
+#  error:
+#    whitelabel:
+#      enabled: false
 
 spring:
   application:
     name: base-project
   main:
     lazy-initialization: true
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
-  mvc:
-    throw-exception-if-no-handler-found: true
-  web:
-    resources:
-      add-mappings: false
+  #  autoconfigure:
+  #    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+  #  mvc:
+  #    throw-exception-if-no-handler-found: true
+  #  web:
+  #    resources:
+  #      add-mappings: false
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    enabled: true
 
   # ===============================
   # DATABASE
@@ -38,7 +43,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServer2008Dialect
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
         format_sql: true
 
 # ===============================
